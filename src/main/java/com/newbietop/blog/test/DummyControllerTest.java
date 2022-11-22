@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.newbietop.blog.model.RoleType;
 import com.newbietop.blog.model.User;
 import com.newbietop.blog.repository.UserRepository;
 
@@ -23,6 +24,7 @@ public class DummyControllerTest {
 		System.out.println("email : " + user.getEmail());		
 		System.out.println("role : " + user.getRole());		
 		
+		user.setRole(RoleType.USER);
 		userRepository.save(user);
 		
 		return "회원가입이 완료되었습니다.test";
