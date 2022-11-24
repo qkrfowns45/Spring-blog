@@ -6,10 +6,12 @@ import java.util.function.Supplier;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +29,19 @@ public class DummyControllerTest {
 
 	@Autowired //DummyControllerTest를 생성할때 자동으로 의존성을 주입해준다.(메모리에 띄워줌)
 	private UserRepository userRepository;
+	
+	@DeleteMapping("/dummy/user/{id}")
+	public String delete(@PathVariable int id) {
+		try {
+			userRepository.deleteById(id);
+		}catch(EmptyResultDataAccessException e) {
+			return "삭제에 실패하였습니다. 해당 id는 없는 id입니다.";
+		}
+		
+		
+		
+		return "삭제 되었습니다. id : " + id;
+	}
 	
 	//save함수는 id에 대한 데이터가 없으면 insert를 하고
 	//id에 대한 데이터가 있으면 update를 한다.
@@ -47,7 +62,7 @@ public class DummyControllerTest {
 //		userRepository.save(user);
 		
 		//더티 체킹
-		return null;
+		return user;
 	}
 	
 	@GetMapping("/dummy/users")
