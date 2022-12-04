@@ -28,3 +28,15 @@
   생각났다. BCryptPasswordEncoder를 써서 만들어놨던 config에 설정해놓고 빈에 등록해주면 ioc로 스프링에서 관리하게 된다. 이렇게 관리된 것을 DI로
   편하게 쓸 수 있어서 spring의 2가지 특징을 한번에 공부할 수 있었다. 그러나 보안관련이라 그런가 경로관련해서 설정하는 것이 상당히 까다로웠다.
     
+
+### 2022-12-04
+> 스프링 시큐리티를 활용해서 시큐리티에서 제공하는 id, password가 아닌 회원가입하여 DB에 저장된 User정보를 가져와 로그인할 수 있게 로직을 구성하였다.
+  loginProcessingUrl사용해서 가로챈 유저정보를 
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+	auth.userDetailsService(principalDetailService).passwordEncoder(encodePWD());
+  } 사용해서 패스워드를 같은 해쉬로 암호화해서 DB에 있는 해쉬랑 비교할 수 있다. 
+  PrincipalDetailService를 생성해서 UserDetailsService를 상속해 인터페이스를 구현한다. userRepository에 username을 select할 수 있는 optional을 주고 생성한다음
+  UserDetails으로 함수를 구현하고 return new PrincipalDetail(principal); 반환해준다. 이때 PrincipalDetail에는 UserDetails의 형식으로 반환해주어야 하니 내부 로직을 생성해준다!
+  진짜 어렵고 양도 많았고 심지어 중간에 DI를 해주지않아 로그인할 때 계속 null이 반환되어 exception이 떨어져 1시간넘게 고생했다. 다하고나니 어떤 로직인지 머리로는 이해되지만 다시하라고하면
+  조금 헤맬거 같다. 기본에 충실하는것이 중요할 거같다! 상속할때 extends와 implements도 구분하자 왜쓰는지 알아두기!!
+  
