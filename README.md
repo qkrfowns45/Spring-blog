@@ -39,4 +39,10 @@
   UserDetails으로 함수를 구현하고 return new PrincipalDetail(principal); 반환해준다. 이때 PrincipalDetail에는 UserDetails의 형식으로 반환해주어야 하니 내부 로직을 생성해준다!
   진짜 어렵고 양도 많았고 심지어 중간에 DI를 해주지않아 로그인할 때 계속 null이 반환되어 exception이 떨어져 1시간넘게 고생했다. 다하고나니 어떤 로직인지 머리로는 이해되지만 다시하라고하면
   조금 헤맬거 같다. 기본에 충실하는것이 중요할 거같다! 상속할때 extends와 implements도 구분하자 왜쓰는지 알아두기!!
+
+### 2022-12-05
+> 블로그 글쓰기 및 글 목록보기 페이징기능을 구현했다. main페이지에서 글 목록을 보여줄 것이기 때문에 @PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable를 
+   사용했고 boardService.글목록(pageable)사용해 pageable을 변수로 넣어주고 page값으로 return을 받았다. return boardRepository.findAll(pageable) 받을때도 간단하게 findAll에 pageable값으로 호출하면
+   page값으로 반환할 수 있다. 또한 글쓸때 ui를 조금 이쁘게 가져가고 싶어서 summernote라이브러리를 가져와 사용했다. 상당히 맘에 들고 sequrity부분이 마무리되니 간단한 crud로 구현되는거같아 가볍게
+   느껴진다.
   
