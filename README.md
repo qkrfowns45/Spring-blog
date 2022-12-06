@@ -45,4 +45,12 @@
    사용했고 boardService.글목록(pageable)사용해 pageable을 변수로 넣어주고 page값으로 return을 받았다. return boardRepository.findAll(pageable) 받을때도 간단하게 findAll에 pageable값으로 호출하면
    page값으로 반환할 수 있다. 또한 글쓸때 ui를 조금 이쁘게 가져가고 싶어서 summernote라이브러리를 가져와 사용했다. 상당히 맘에 들고 sequrity부분이 마무리되니 간단한 crud로 구현되는거같아 가볍게
    느껴진다.
+
+### 2022-12-06
+> 블로그 글쓰기의 마무리인 상세보기, 삭제하기, 수정하기 등을 구현했다. ajax로 넘기는 데이터는 apicontroller로 넘겨주기로했다. CRUD의 전과정을 할 수 있었고 ui나 간단한 것들만 진행하면 될 거 같다.
+   전체 블로그의 틀은 구현했고 이제 라이브러리나 opensource들을 사용해 풍부하게 만들어 볼 예정이다. 다음에는 회원수정을 진행할 것이다.
+
+
+
+
   
