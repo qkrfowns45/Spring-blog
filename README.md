@@ -54,6 +54,11 @@
 > 이번에는 회원정보 수정을 구현했다. 간단하게 joinForm.jsp를 복사 및 수정해서 updateForm으로 만들었고 필요한 데이터만 ajax로 json으로 만들어 넘겨줬다. restful하게 로직을 구현하고 스프링 boot의 큰 장점인
    더티체킹을 통해 하나의 @Transactional을 써서 자동으로 메서드가 끝나면 커밋되는 것을 한번 더 확인했다. 이제는 rest도 금방 구현할 수 있어 자신감이 붙었다. 계속 회원수정을 구현하고 카카오 로그인도 구현할 계획이다.
 
-
+### 2022-12-09
+> 회원정보를 수정하면서 수정이 완료되고 다시 돌아가면 저장된 정보를 불러오기 위해 세션을 update해줘야한다는걸 알게되었다. AuthenticationManager를 통해 Authentication객체를 생성해주고
+   AuthenticationManager 객체 활용하기 위해 SecurityConfig에 생성하고 @Bean으로 등록해서 IoC로 관리하게 한다. AuthenticationManager 객체를 활용해 수정된 user정보에서 username과 password로 새로운 토큰을 만들어 Authentication객체를 생성.
+   HttpSession의  SecurityContextHolder안에 SecurityContext안에 있는 Authentication객체를 AuthenticationManager를 통해 내가 새로만든 Authentication객체로 수정해준다! 진짜 이해하기 어려웠지만 이제는 하면서 이해력이 높아지는 것 같다.
+   마지막에 json으로 username을 보내지않아 session에 저장이 안돼 당황했지만 디버깅하면서 찾아냈고 설정하는데 크게 어렵지 않았다. 덕분에 session을 update하는 것에 크게 관심을 가진 시간이었다. 카카로 로그인까지 마치고 싶었는데
+   생각보다 길어져서 카카오 개발자 센터에서 애플리케이션으로 추가해서 사용할 서비스들의 환경설정을 진행했다. 그동한 공부한 Rest api가 활용될 순간이라 정말 기대된다.
 
   
