@@ -32,10 +32,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //프로젝트에서 연결된 DB의 넘버링 전략을 따라간다.
 	private int id; //시퀀스,auto_increment
 	
-	@Column(nullable = false, length = 30)
+	@Column(nullable = false, length = 100, unique = true)
 	private String username; //아이디
 
-	@Column(nullable = false, length = 100) //암호화할거라 넉넉하게 사이즈 조정
+	@Column(nullable = false, length = 150) //암호화할거라 넉넉하게 사이즈 조정
 	private String password; //패스워드
 	
 	@Column(nullable = false, length = 50)
@@ -45,6 +45,8 @@ public class User {
 	//DB는 RoleType이 없다.
 	@Enumerated(EnumType.STRING)
 	private RoleType role; //Enum을 쓰는게 좋다 .//회원의 권한 설정임 //ADMIN, USER
+	
+	private String oauth; //kakao, google
 	
 	@CreationTimestamp //시간이 자동으로 입력
 	private Timestamp createDate;
