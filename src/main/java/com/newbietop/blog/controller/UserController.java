@@ -154,8 +154,7 @@ public class UserController {
 		//로그인 처리
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(kakaouser.getUsername(), newbietopKey));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		System.out.println(authentication.getPrincipal()+" "+ authentication.getName());
-		System.out.println(SecurityContextHolder.getContext().getAuthentication());
+
 		
 		HttpHeaders headers3 = new HttpHeaders();
         headers3.setLocation(URI.create("/"));

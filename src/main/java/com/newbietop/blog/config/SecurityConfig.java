@@ -1,5 +1,7 @@
 package com.newbietop.blog.config;
 
+import java.io.Serializable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +21,7 @@ import com.newbietop.blog.config.auth.PrincipalDetailService;
 @Configuration //빈 등록
 @EnableWebSecurity // 시큐리티 필터가 등록이 된다.
 @EnableGlobalMethodSecurity(prePostEnabled = true) //특정 주소로 접근을 하면 권한 및 인증을 미리 체크하겠다는 뜻
-public class SecurityConfig{
+public class SecurityConfig {
 	
 	@Autowired
 	private PrincipalDetailService principalDetailService;
@@ -57,7 +59,7 @@ public class SecurityConfig{
 		    .loginPage("/auth/loginForm")
 		    .loginProcessingUrl("/auth/loginProc") //스프링 시큐리티가 해당 주소로 요청오는 로그인을 가로채서 대신 로그인 해준다.
 		    .defaultSuccessUrl("/"); 
-		    
+		
 		return http.build();
 	}
 

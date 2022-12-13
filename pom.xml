@@ -24,11 +24,12 @@
 		  <artifactId>spring-security-taglibs</artifactId>
 		</dependency>
 		
-		<!-- JSP 템플릿 엔진 -->
+		<!-- JSP 템플릿 엔진-->
 		<dependency>
 		  <groupId>org.apache.tomcat.embed</groupId>
 		  <artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
+	
 		
 		<!-- JSTL -->
 		<dependency>
@@ -81,6 +82,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
 
 	<build>
 		<plugins>
@@ -97,6 +99,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<defaultGoal>install</defaultGoal>
 	</build>
 
 </project>
