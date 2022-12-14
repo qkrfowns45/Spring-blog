@@ -12,6 +12,10 @@ let index = {
 			this.update();
 		});
 		
+		$("#btn-reply-save").on("click",()=>{ //funtion(){}, ()=>{} this를 바인딩하기 위해서!!
+			this.replySave();
+		});
+		
 	},
 	
 	save:function(){
@@ -70,7 +74,30 @@ let index = {
 		}).fail(function(error){
 			alert(JSON.stringify(error));
 		});
-	}
+	},
+	
+	replySave:function(){
+		//alert('user의 save함수 호출됨');
+		let data = {
+			content:$("#reply-content").val()
+		};
+		let boardId = $("#boardId").val();
+		
+		console.log(data);
+		
+		$.ajax({
+			type:"POST",
+			url:`/api/board/${boardId}/reply`,
+			data:JSON.stringify(data),
+			contentType:"application/json;charset=utf-8",
+			dataType:"json"
+		}).done(function(resp){
+			alert("댓글작성이 완료되었습니다.");
+			location.href = `/board/${boardId}`;
+		}).fail(function(error){
+			alert(JSON.stringify(error));
+		});
+	},
 	
 }
 
