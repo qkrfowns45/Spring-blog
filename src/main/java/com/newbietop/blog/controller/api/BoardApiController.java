@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.newbietop.blog.config.auth.PrincipalDetail;
+import com.newbietop.blog.dto.ReplySaveRequestDto;
 import com.newbietop.blog.dto.ResponseDto;
 import com.newbietop.blog.model.Board;
 import com.newbietop.blog.model.Reply;
@@ -44,10 +45,13 @@ public class BoardApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
 	}
 	
+	//데이터를 받을 때 컨트롤러에서 dto를 만들어서 받는 것이 좋다.
+	//dto를 사용하지 않은 이유는 작은 프로젝트라서 데이터가 적어서 안사용했다.
+	//필요한 데이터를 한번에 넣을 수 있다.
 	@PostMapping("/api/board/{boardId}/reply")
-	public ResponseDto<Integer> replySave(@PathVariable int boardId,@RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principal) {
+	public ResponseDto<Integer> replySave(@RequestBody ReplySaveRequestDto replySaveRequsetDto) {
 		
-		boardService.댓글쓰기(principal.getUser(),boardId,reply);
+		boardService.댓글쓰기(replySaveRequsetDto);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
 	}
 	
