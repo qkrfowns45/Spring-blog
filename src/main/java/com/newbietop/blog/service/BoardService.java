@@ -72,17 +72,23 @@ public class BoardService {
 	@Transactional
 	public void 댓글쓰기(ReplySaveRequestDto replySaveRequestDto) {
 		
-		Board board = boardRepository.findById(replySaveRequestDto.getBoardId()).orElseThrow(()->{
-			return new IllegalArgumentException("댓글 찾기 실패: 유저 id를 찾을 수 없습니다.");
-		}); //영속화 완료
+//		Board board = boardRepository.findById(replySaveRequestDto.getBoardId()).orElseThrow(()->{
+//			return new IllegalArgumentException("댓글 찾기 실패: 유저 id를 찾을 수 없습니다.");
+//		}); //영속화 완료
+//		
+//		User user = userRepository.findById(replySaveRequestDto.getUserId()).orElseThrow(()->{
+//			return new IllegalArgumentException("댓글 찾기 실패: 게시글 id를 찾을 수 없습니다.");
+//		}); //영속화 완료
 		
-		User user = userRepository.findById(replySaveRequestDto.getUserId()).orElseThrow(()->{
-			return new IllegalArgumentException("댓글 찾기 실패: 게시글 id를 찾을 수 없습니다.");
-		}); //영속화 완료
-		
-		Reply reply = new Reply();
-		reply.update(user, board, replySaveRequestDto.getContent());
+//		Reply reply = new Reply();
+//		reply.update(user, board, replySaveRequestDto.getContent());
+
+		//네이티브 쿼리사용! 순서를 잘 맞춰야함
+		replyRepository.mSave(replySaveRequestDto.getUserId(),replySaveRequestDto.getBoardId(),replySaveRequestDto.getContent());
+	}
 	
-		replyRepository.save(reply);
+	@Transactional
+	public void 댓글삭제(int replyId) {
+		replyRepository.deleteById(replyId);
 	}
 }
